@@ -1,0 +1,38 @@
+services:
+  - type: web
+    name: sentinel-api
+    runtime: node
+    buildCommand: npm ci --include=dev && npm run build:shared && npm run build:backend
+    startCommand: node backend/dist/server.js
+    healthCheckPath: /api/health
+    autoDeploy: false
+    envVars:
+    
+      - key: NODE_ENV
+        value: production
+      - key: CORS_ORIGIN
+        value: https://sentinel-frontend.onrender.com
+      - key: STORAGE_DRIVER
+        value: supabase
+      - key: GEMINI_MODEL
+        value: gemini-1.5-flash
+      - key: DEMO_MODE
+        value: "false"
+      # Set these via Render Dashboard → Environment → Secret variables:
+      # SUPABASE_URL         = https://your-project.supabase.co
+      # SUPABASE_SERVICE_ROLE_KEY = <service role key>
+      # GEMINI_API_KEY       = <google ai api key>
+      # JWT_SECRET           = <strong random secret>
+
+  - type: static
+    name: sentinel-frontend
+    buildCommand: npm ci --include=dev && npm run build:shared && npm run build:frontend
+    staticPublishPath: frontend/dist
+    autoDeploy: false
+    envVars:
+      - key: VITE_API_URL
+        value: https://sentinel-api.onrender.com/api
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html

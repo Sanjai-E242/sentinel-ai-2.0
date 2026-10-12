@@ -1,0 +1,66 @@
+@import './design-tokens.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    border-color: var(--border-subtle);
+  }
+
+  body {
+    background-color: var(--bg-app);
+    color: var(--text-primary);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+}
+
+@layer components {
+  /* Tactile Surface Cards - Pixel style */
+  .card-tactile {
+    background-color: var(--bg-surface-primary);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-tactile);
+    transition: all var(--motion-duration-normal) var(--motion-ease);
+  }
+
+  .card-tactile:hover {
+    box-shadow: var(--shadow-floating);
+    border-color: var(--border-medium);
+  }
+
+  /* Pixel-style Pill Chip */
+  .chip-pill {
+    display: inline-flex;
+    align-items: center;
+    border-radius: var(--radius-full);
+    padding: 0.375rem 0.875rem;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    transition: background-color var(--motion-duration-fast) var(--motion-ease);
+  }
+
+  /* Scenario step fade-in */
+  .animate-fadeIn {
+    animation: fadeInUp 0.3s var(--motion-ease) both;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-fadeIn {
+    animation: none;
+  }
+}

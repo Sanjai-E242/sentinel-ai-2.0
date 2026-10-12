@@ -1,0 +1,47 @@
+{
+  "name": "sentinel-2",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Sentinel 2.0 - Runtime Control Layer for AI Agents",
+  "workspaces": [
+    "shared",
+    "backend",
+    "frontend"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspace=@sentinel/backend",
+    "dev:backend": "npm run dev --workspace=@sentinel/backend",
+    "dev:frontend": "npm run dev --workspace=@sentinel/frontend",
+    "start": "node backend/dist/server.js",
+    "build": "npm run build --workspace=@sentinel/shared && npm run build --workspace=@sentinel/backend && npm run build --workspace=@sentinel/frontend",
+    "build:shared": "npm run build --workspace=@sentinel/shared",
+    "build:backend": "npm run build --workspace=@sentinel/backend",
+    "build:frontend": "npm run build --workspace=@sentinel/frontend",
+    "typecheck": "npm run typecheck --workspace=@sentinel/shared && npm run typecheck --workspace=@sentinel/backend && npm run typecheck --workspace=@sentinel/frontend",
+    "test": "npm run test --workspace=@sentinel/backend && npm run test --workspace=@sentinel/frontend",
+    "test:gemini": "tsx scripts/gemini-agent.ts",
+    "demo": "tsx scripts/demo-external-agent.ts",
+    "demo:gemini": "tsx scripts/gemini-agent.ts",
+    "demo:mock": "tsx scripts/gemini-agent.ts --mock",
+    "gemini-agent": "tsx scripts/gemini-agent.ts",
+    "scenario": "tsx scripts/demo-scenarios.ts"
+  },
+  "keywords": [
+    "ai-safety",
+    "runtime-control",
+    "sentinel",
+    "agent-governance",
+    "intervention-window"
+  ],
+  "author": "Sentinel Team",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@google/generative-ai": "^0.24.1",
+    "@types/node": "^20.19.43",
+    "typescript": "^5.4.5"
+  },
+  "devDependencies": {
+    "@types/node": "^20.19.43",
+    "typescript": "^5.4.5"
+  }
+}
